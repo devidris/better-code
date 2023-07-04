@@ -2,6 +2,7 @@
   "name": "better-code",
   "displayName": "better code",
   "description": "Help optimize and comment code",
+  "publisher": "dev-idris",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.79.0"

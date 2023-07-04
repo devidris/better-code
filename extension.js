@@ -83,7 +83,7 @@ const comment = async function () {
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
-          title: "Optimizing Code",
+          title: "Commenting Code",
           cancellable: false,
         },
         async (progress) => {
@@ -174,7 +174,7 @@ const writeCode = async function () {
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
-          title: "Optimizing Code",
+          title: "Writing Code",
           cancellable: false,
         },
         async (progress) => {
@@ -205,6 +205,7 @@ const writeCode = async function () {
   }
 };
 
+// pgajwjbtbfwhrtam7g2wk32dtpzoztjjkkwetnxmmrhn27w3zspq
 const debugAndFixCode = async function () {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
@@ -223,7 +224,7 @@ const debugAndFixCode = async function () {
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
-          title: "Optimizing Code",
+          title: "Debuging and Fixing Code",
           cancellable: false,
         },
         async (progress) => {
@@ -295,3 +296,4 @@ module.exports = {
   activate,
   deactivate,
 };
+
