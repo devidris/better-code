@@ -1,66 +1,50 @@
-# better-code README
+# Better-Code Extension
 
-This is the README for your extension "better-code". After writing up a brief description, we recommend including the following sections.
+The "better-code" extension enhances your code writing experience in Visual Studio Code by utilizing the AI to provide helpful suggestions for code optimization, adding comments, writing code, and debugging code. It leverages the recent AI powerful language models to generate insightful and programmatic recommendations.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Optimize
 
-For example if there is an image subfolder under your extension project workspace:
+- **Command:** `better-code.optimize`
+- **Description:** This command optimizes the selected code block. It analyzes the provided code and returns an optimized version that is expected to perform faster or more efficiently.
 
-\!\[feature X\]\(images/feature-x.png\)
+### Comment
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- **Command:** `better-code.comment`
+- **Description:** This command adds comments to the selected code block. It provides descriptive comments that help document the code's functionality and logic.
 
-## Requirements
+### Optimize and Comment
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- **Command:** `better-code.optimizeandcomment`
+- **Description:** This command combines the features of optimization and commenting. It optimizes the selected code block and adds helpful comments to explain the changes made for better understanding.
 
-## Extension Settings
+### Write Code
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- **Command:** `better-code.write`
+- **Description:** This command converts a plain text prompt into a programmatic command. It helps write code based on the provided description or task.
 
-For example:
+### Debug and Fix Code
 
-This extension contributes the following settings:
+- **Command:** `better-code.debug`
+- **Description:** This command assists in debugging code. It identifies and suggests fixes for potential bugs in the selected code block.
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+## Getting Started
 
-## Known Issues
+1. Install the "better-code" extension from the Visual Studio Code Extension Marketplace.
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+2. Use the available commands from the Command Palette in Visual Studio Code or configure keybindings for quick access.
 
-## Release Notes
+## Notes
 
-Users appreciate release notes as you update your extension.
+- The extension shows loading progress. This ensures smooth interactions without blocking the user interface.
 
-### 1.0.0
+- Remember to have an active internet connection as the extension requires online access.
 
-Initial release of ...
+## Contribution
 
-### 1.0.1
+Feel free to contact me at info@dev-idris.com, if you have any suggestions
 
-Fixed issue #.
+## Author
 
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
-# better-code
+This "better-code" extension is developed by Idris.
