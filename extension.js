@@ -11,7 +11,7 @@ require("dotenv").config({
 // });
 
 const configuration = new Configuration({
-  apiKey: "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",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
@@ -20,6 +20,18 @@ const openai = new OpenAIApi(configuration);
  * @param {vscode.ExtensionContext} context
  */
 
+const handleError = function (err, msg = false) {
+  if (msg) {
+    return msg;
+  }
+  const Max_Content = err.response.data.error.message.includes(
+    "maximum context length is 4097 tokens"
+  );
+  if (Max_Content) {
+    return "The maximum code length 2000 characters, reduce the length of the code";
+  }
+  return "Something went wrong";
+};
 const optimize = async function () {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
@@ -27,12 +39,22 @@ const optimize = async function () {
     const currentFile = editor.document;
     const currentFileExtension = currentFile.fileName.split(".").pop();
     const highlightedCode = editor.document.getText(selection);
+    if (highlightedCode.length > 2000) {
+      vscode.window.showErrorMessage(
+        handleError(
+          "_",
+          "The maximum code length 2000 characters, reduce the length of the code"
+        )
+      );
 
+      return;
+    }
     const prompt =
-      "return optimized faster code Performance optimization techniques to a programmatic command " +
+      "optimize and make code run faster using Performance optimization techniques" +
       highlightedCode +
       "in" +
-      currentFileExtension;
+      currentFileExtension +
+      "return a programmatic command";
 
     try {
       await vscode.window.withProgress(
@@ -48,7 +70,7 @@ const optimize = async function () {
             model: "text-davinci-003",
             prompt,
             temperature: 1,
-            max_tokens: 4000,
+            max_tokens: 4097,
           });
 
           editor.edit((editBuilder) => {
@@ -60,7 +82,7 @@ const optimize = async function () {
         }
       );
     } catch (err) {
-      console.log(err.response);
+      vscode.window.showErrorMessage(handleError(err));
     }
   }
 };
@@ -72,7 +94,16 @@ const comment = async function () {
     const currentFile = editor.document;
     const currentFileExtension = currentFile.fileName.split(".").pop();
     const highlightedCode = editor.document.getText(selection);
+    if (highlightedCode.length > 2000) {
+      vscode.window.showErrorMessage(
+        handleError(
+          "_",
+          "The maximum code length 2000 characters, reduce the length of the code"
+        )
+      );
 
+      return;
+    }
     const prompt =
       "return same code but with comments to a programmatic command " +
       highlightedCode +
@@ -93,7 +124,7 @@ const comment = async function () {
             model: "text-davinci-003",
             prompt,
             temperature: 0,
-            max_tokens: 4000,
+            max_tokens: 4097,
           });
           editor.edit((editBuilder) => {
             editBuilder.replace(selection, completion.data.choices[0].text);
@@ -105,7 +136,7 @@ const comment = async function () {
         }
       );
     } catch (err) {
-      console.log(err.response);
+      vscode.window.showErrorMessage(handleError(err));
     }
   }
 };
@@ -117,12 +148,21 @@ const optimizeAndComment = async function () {
     const currentFile = editor.document;
     const currentFileExtension = currentFile.fileName.split(".").pop();
     const highlightedCode = editor.document.getText(selection);
-
+    if (highlightedCode.length > 2000) {
+      vscode.window.showErrorMessage(
+        handleError(
+          "_",
+          "The maximum code length 2000 characters, reduce the length of the code"
+        )
+      );
+      return;
+    }
     const prompt =
       "optimize code and return optimized code but with comments" +
       highlightedCode +
       "in" +
       currentFileExtension;
+
     try {
       await vscode.window.withProgress(
         {
@@ -137,7 +177,7 @@ const optimizeAndComment = async function () {
             model: "text-davinci-003",
             prompt,
             temperature: 1,
-            max_tokens: 4000,
+            max_tokens: 4097,
           });
           editor.edit((editBuilder) => {
             editBuilder.replace(selection, completion.data.choices[0].text);
@@ -151,7 +191,7 @@ const optimizeAndComment = async function () {
         }
       );
     } catch (err) {
-      console.log(err.response);
+      vscode.window.showErrorMessage(handleError(err));
     }
   }
 };
@@ -163,7 +203,16 @@ const writeCode = async function () {
     const currentFile = editor.document;
     const currentFileExtension = currentFile.fileName.split(".").pop();
     const highlightedCode = editor.document.getText(selection);
+    if (highlightedCode.length > 2000) {
+      vscode.window.showErrorMessage(
+        handleError(
+          "_",
+          "The maximum code length 2000 characters, reduce the length of the code"
+        )
+      );
 
+      return;
+    }
     const prompt =
       "Convert this text to a programmatic command" +
       highlightedCode +
@@ -184,7 +233,7 @@ const writeCode = async function () {
             model: "text-davinci-003",
             prompt,
             temperature: 1,
-            max_tokens: 4000,
+            max_tokens: 4097,
             top_p: 1.0,
             frequency_penalty: 0.2,
             presence_penalty: 0.0,
@@ -194,18 +243,15 @@ const writeCode = async function () {
             // console.log(completion.data.choices[0].text)
           });
           // Show a success message
-          vscode.window.showInformationMessage(
-            "Code generated successfully."
-          );
+          vscode.window.showInformationMessage("Code generated successfully.");
         }
       );
     } catch (err) {
-      console.log(err.response);
+      vscode.window.showErrorMessage(handleError(err));
     }
   }
 };
 
-// pgajwjbtbfwhrtam7g2wk32dtpzoztjjkkwetnxmmrhn27w3zspq
 const debugAndFixCode = async function () {
   const editor = vscode.window.activeTextEditor;
   if (editor) {
@@ -213,7 +259,16 @@ const debugAndFixCode = async function () {
     const currentFile = editor.document;
     const currentFileExtension = currentFile.fileName.split(".").pop();
     const highlightedCode = editor.document.getText(selection);
+    if (highlightedCode.length > 2000) {
+      vscode.window.showErrorMessage(
+        handleError(
+          "_",
+          "The maximum code length 2000 characters, reduce the length of the code"
+        )
+      );
 
+      return;
+    }
     const prompt =
       "Fix bugs in the below code" +
       highlightedCode +
@@ -234,7 +289,7 @@ const debugAndFixCode = async function () {
             model: "text-davinci-003",
             prompt,
             temperature: 1,
-            max_tokens: 4000,
+            max_tokens: 4097,
             top_p: 1.0,
             frequency_penalty: 0.0,
             presence_penalty: 0.0,
@@ -245,13 +300,11 @@ const debugAndFixCode = async function () {
             // console.log(completion.data.choices[0].text)
           });
           // Show a success message
-          vscode.window.showInformationMessage(
-            "Code fixed."
-          );
+          vscode.window.showInformationMessage("Code fixed.");
         }
       );
     } catch (err) {
-      console.log(err.response);
+      vscode.window.showErrorMessage(handleError(err));
     }
   }
 };
@@ -296,4 +349,3 @@ module.exports = {
   activate,
   deactivate,
 };
-

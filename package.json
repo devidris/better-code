@@ -3,7 +3,8 @@
   "displayName": "better code",
   "description": "Help optimize and comment code",
   "publisher": "dev-idris",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "icon": "my-logo.png",
   "engines": {
     "vscode": "^1.79.0"
   },
@@ -33,6 +34,38 @@
       {
         "command": "better-code.debug",
         "title": "Debug and Fix Code"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "better-code.optimize",
+        "key": "ctrl+shift+o",
+        "mac": "cmd+shift+o",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "better-code.comment",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "better-code.optimizeandcomment",
+        "key": "ctrl+shift+a",
+        "mac": "cmd+shift+a",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "better-code.write",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "better-code.debug",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus"
       }
     ]
   },
